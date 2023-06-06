@@ -26,7 +26,7 @@ setup_build_tools
 for build in "${builds[@]}"
 do
     echo "${build}"
-
+    
     machine=($(read_build_config ${build} machine))
     bsp_version=($(read_build_config ${build} bsp_version))
     distro_variant=($(read_build_config ${build} distro_variant))

@@ -25,11 +25,15 @@ build=$1
     cd ${topdir}/build/${build}
 
     log "> Cleaning up ${build}"
-    (tar --use-compress-program="pigz --best --recursive | pv" -cf tisdk-${distro}-${machine}-rootfs.tar.xz tisdk-${distro}-${machine}-rootfs) &>>"${LOG_FILE}"
-
+    cd tisdk-${distro}-${machine}-rootfs
+    tar --use-compress-program="pigz --best --recursive | pv" -cf ../tisdk-${distro}-${machine}-rootfs.tar.xz * &>>"${LOG_FILE}"
+    cd ../
     rm -rf tisdk-${distro}-${machine}-rootfs
 
-    tar --use-compress-program="pigz --best --recursive | pv" -cf tisdk-${distro}-${machine}-boot.tar.xz tisdk-${distro}-${machine}-boot &>>"${LOG_FILE}"
+    cd tisdk-${distro}-${machine}-boot
+    tar --use-compress-program="pigz --best --recursive | pv" -cf ../tisdk-${distro}-${machine}-boot.tar.xz * &>>"${LOG_FILE}"
+    cd ../
+    
     rm -rf tisdk-${distro}-${machine}-boot
 
     rm -rf bsp_sources
