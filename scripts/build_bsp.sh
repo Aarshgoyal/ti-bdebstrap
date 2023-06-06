@@ -149,8 +149,11 @@ machine=$1
 
     echo "> ATF: building .."
     
-    make -j`nproc` ARCH=aarch64 CROSS_COMPILE=aarch64-none-linux-gnu- PLAT=k3 TARGET_BOARD=${target_board} SPD=opteed 
-    
+    if [ ${machine} = "j721s2-evm" ] || [ ${machine} = "j784s4-evm" ]; then
+        make -j`nproc` ARCH=aarch64 CROSS_COMPILE=aarch64-none-linux-gnu- PLAT=k3 TARGET_BOARD=${target_board} SPD=opteed K3_USART=0x8
+    else 
+        make -j`nproc` ARCH=aarch64 CROSS_COMPILE=aarch64-none-linux-gnu- PLAT=k3 TARGET_BOARD=${target_board} SPD=opteed 
+    fi 
    
 }
 
