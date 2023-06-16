@@ -13,7 +13,6 @@ mmdebstrap:
     - non-free-firmware
   packages:
     - build-essential
-    - firmware-ti-connectivity
     - init
     - iproute2
     - less
