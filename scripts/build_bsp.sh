@@ -57,11 +57,10 @@ bsp_version=$3
         cd ${topdir}/build/${build}/bsp_sources
         log ">> ti-u-boot: not found. cloning .."
         uboot_srcrev=($(read_bsp_config ${bsp_version} uboot_srcrev))
-        git clone \
-            https://git.ti.com/git/ti-u-boot/ti-u-boot.git \
-            -b ${uboot_srcrev} \
-            --single-branch \
-            --depth=1 &>>"${LOG_FILE}"
+        git clone https://git.ti.com/git/ti-u-boot/ti-u-boot.git &>>"${LOG_FILE}"
+        cd ti-u-boot
+        git checkout ${uboot_srcrev} &>>"${LOG_FILE}"
+        cd ..
         log ">> ti-u-boot: cloned"
         if [ -d ${topdir}/patches/ti-u-boot ]; then
             log ">> ti-u-boot: patching .."
@@ -78,11 +77,10 @@ bsp_version=$3
         cd ${topdir}/build/${build}/bsp_sources
         log ">> ti-linux-firmware: not found. cloning .."
         linux_fw_srcrev=($(read_bsp_config ${bsp_version} linux_fw_srcrev))
-        git clone \
-            https://git.ti.com/git/processor-firmware/ti-linux-firmware.git \
-            -b ${linux_fw_srcrev} \
-            --single-branch \
-            --depth=1 &>>"${LOG_FILE}"
+        git clone https://git.ti.com/git/processor-firmware/ti-linux-firmware.git &>>"${LOG_FILE}"
+        cd ti-linux-firmware
+        git checkout ${linux_fw_srcrev} &>>"${LOG_FILE}"
+        cd ..        
         log ">> ti-linux-firmware: cloned"
     else
         log ">> ti-linux-firmware: available"

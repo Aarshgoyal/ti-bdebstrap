@@ -3,9 +3,9 @@
     uboot_method = "k3ig"
     atf_srcrev = "2fcd408bb3a6756767a43c073c597cef06e7f2d5"
     optee_srcrev = "8e74d47616a20eaa23ca692f4bbbf917a236ed94"
-    uboot_srcrev = "09.00.00.002"
+    uboot_srcrev = "f08d85fc66a0b730f7bbd64900e146264f858fe3"
     k3ig_srcrev = "09.00.00.002"
-    linux_fw_srcrev = "09.00.00.002"
+    linux_fw_srcrev = "03aa1fb1c65b879f90af91467b2e2f18f5f7a21c"
     linux_kernel_srcrev = "09.00.00.002"
     img_rogue_driver_srcrev = "linuxws/kirkstone/k6.1/23.1.6404501"
 
