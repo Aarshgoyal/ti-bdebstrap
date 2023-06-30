@@ -6,6 +6,7 @@ builds = [
     "j721s2-evm_bullseye_09.00.00.002",
     "j721e-evm_bullseye_09.00.00.002",
     "j784s4-evm_bullseye_09.00.00.002",
+    "j7200-evm_bullseye_09.00.00.002",
 ]
 
 [am62x_bookworm_09.00.00.002]
@@ -33,4 +34,7 @@ builds = [
     bsp_version = "09.00.00.002"
     distro_variant = "bullseye-default"
     
-
+[j7200-evm_bullseye_09.00.00.002]
+    machine = "j7200-evm"
+    bsp_version = "09.00.00.002"
+    distro_variant = "bullseye-default"

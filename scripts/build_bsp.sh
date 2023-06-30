@@ -197,6 +197,13 @@ machine=$1
         cp ${UBOOT_DIR}/out/r5/tiboot3*.bin ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/ &>> ${LOG_FILE}
         cp ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/tiboot3-${soc_type}.bin ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/tiboot3.bin 
 
+     elif [ ${machine} = "j7200-evm" ]; then
+        soc_type=($(read_machine_config ${machine} soc_type))
+        make -j`nproc` ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- ${uboot_r5_defconfig} O=${UBOOT_DIR}/out/r5 &>>"${LOG_FILE}"
+        make -j`nproc` ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=${UBOOT_DIR}/out/r5 BINMAN_INDIRS=${topdir}/build/${build}/bsp_sources/ti-linux-firmware &>>"${LOG_FILE}"
+        cp ${UBOOT_DIR}/out/r5/tiboot3*.bin ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/ &>> ${LOG_FILE}
+        # cp ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/tiboot3-${soc_type}.bin ${topdir}/build/${build}/tisdk-${distro}-${machine}-boot/tiboot3.bin 
+
     else 
         make -j`nproc` ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- ${uboot_r5_defconfig} O=${UBOOT_DIR}/out/r5 &>>"${LOG_FILE}"
         make -j`nproc` ARCH=arm CROSS_COMPILE=arm-none-linux-gnueabihf- O=${UBOOT_DIR}/out/r5 BINMAN_INDIRS=${topdir}/build/${build}/bsp_sources/ti-linux-firmware &>>"${LOG_FILE}"
@@ -205,7 +212,7 @@ machine=$1
 
     cd ${UBOOT_DIR}
 
-    if [ ${machine} = "j721s2-evm" ] || [ ${machine} = "j784s4-evm" ]; then
+    if [ ${machine} = "j721s2-evm" ] || [ ${machine} = "j784s4-evm" ] || [ ${machine} = "j7200-evm" ]; then
         uboot_a72_defconfig=`read_machine_config ${machine} uboot_a72_defconfig`
         target_board=($(read_machine_config ${machine} atf_target_board))
         log "> uboot-a72: building .."
@@ -258,7 +265,7 @@ rootfs_dir=$2
     log "kernel: installing DTBs .."
     mkdir -p ${rootfs_dir}/boot/dtb
     cp -rf arch/arm64/boot/dts/ti ${rootfs_dir}/boot/dtb/
-
+    
     log "kernel: installing modules .."
     make ARCH=arm64  INSTALL_MOD_PATH=${rootfs_dir} modules_install &>>"${LOG_FILE}"
 }
@@ -267,16 +274,19 @@ function build_ti_img_rogue_driver() {
 machine=$1
 rootfs_dir=$2
 kernel_dir=$3
+    if [ ${machine} = "j7200-evm" ]; then
+        return 1;
+    else
+        pvr_target=($(read_machine_config ${machine} pvr_target))
+        pvr_window_system=($(read_machine_config ${machine} pvr_window_system))
+        cd ${IMG_ROGUE_DRIVER_DIR}
 
-    pvr_target=($(read_machine_config ${machine} pvr_target))
-    pvr_window_system=($(read_machine_config ${machine} pvr_window_system))
-    cd ${IMG_ROGUE_DRIVER_DIR}
+        log "ti-img-rogue-driver: building .."
+        make CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 KERNELDIR=${kernel_dir} RGX_BVNC="33.15.11.3" BUILD=release PVR_BUILD_DIR=${pvr_target} WINDOW_SYSTEM=${pvr_window_system} &>>"${LOG_FILE}"
 
-    log "ti-img-rogue-driver: building .."
-    make CROSS_COMPILE=aarch64-none-linux-gnu- ARCH=arm64 KERNELDIR=${kernel_dir} RGX_BVNC="33.15.11.3" BUILD=release PVR_BUILD_DIR=${pvr_target} WINDOW_SYSTEM=${pvr_window_system} &>>"${LOG_FILE}"
-
-    log "ti-img-rogue-driver: installing .."
-     
-    cd binary_${pvr_target}_${pvr_window_system}_release/target_aarch64/kbuild &>>"${LOG_FILE}"
-    make -C ${kernel_dir} ARCH=arm64 CROSS_COMPILE=aarch64-none-linux-gnu- INSTALL_MOD_PATH=${rootfs_dir} INSTALL_MOD_STRIP=1 M=`pwd` modules_install &>>"${LOG_FILE}"
+        log "ti-img-rogue-driver: installing .."
+        
+        cd binary_${pvr_target}_${pvr_window_system}_release/target_aarch64/kbuild &>>"${LOG_FILE}"
+        make -C ${kernel_dir} ARCH=arm64 CROSS_COMPILE=aarch64-none-linux-gnu- INSTALL_MOD_PATH=${rootfs_dir} INSTALL_MOD_STRIP=1 M=`pwd` modules_install &>>"${LOG_FILE}"
+    fi
 }

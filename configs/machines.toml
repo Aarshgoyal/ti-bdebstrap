@@ -50,4 +50,12 @@
     pvr_window_system = "wayland"
     soc_type = "j784s4-hs-fs-evm"
 
-
+[j7200-evm]
+    hostname = "j7200"
+    atf_target_board = "generic"
+    optee_platform = "k3-j784s4"
+    sysfw_soc = "j7200" 
+    dmfw_dir = "j7200"
+    uboot_r5_defconfig = "j7200_evm_r5_defconfig"
+    uboot_a72_defconfig = "j7200_evm_a72_defconfig"
+    soc_type = "j7200-gp-evm"
