@@ -1,4 +1,6 @@
 #!/bin/bash
+#source build_deb.sh
+#deb_package --package_name deb_package --control_file ~/new_workspace/ti-bdebstrap/control --location /etc/apt/ --Initial ~/new_workspace/ti-bdebstrap/apt.conf
 
 function deb_package(){
   while [ $# -gt 0 ]; do
