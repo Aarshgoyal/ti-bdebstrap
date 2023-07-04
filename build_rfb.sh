@@ -44,7 +44,7 @@ if [ ${machine} = "j721s2-evm" ]; then
   ln -sfn /${location}/ti-ipc/j721s2/ipc_echo_test_mcu3_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j721s2-main-r5f1_1-fw
   ln -sfn /${location}/ti-ipc/j721s2/ipc_echo_test_mcu1_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j721s2-mcu-r5f0_1-fw
 
-elif [ ${machine} = "j721e-evm"]; then 
+elif [ ${machine} = "j721e-evm" ]; then 
   ln -sfn /${location}/ti-ipc/j721e/ipc_echo_test_c66xdsp_1_release_strip.xe66 ${topdir}/${package_name}/${location}/j7-c66_0-fw
   ln -sfn /${location}/ti-ipc/j721e/ipc_echo_test_c66xdsp_2_release_strip.xe66 ${topdir}/${package_name}/${location}/j7-c66_1-fw
   ln -sfn /${location}/ti-ipc/j721e/ipc_echo_test_c7x_1_release_strip.xe71 ${topdir}/${package_name}/${location}/j7-main-r5f0_0-fw
@@ -54,7 +54,7 @@ elif [ ${machine} = "j721e-evm"]; then
   ln -sfn /${location}/ti-ipc/j721e/ipc_echo_test_mcu3_0_release_strip.xer5f ${topdir}/${package_name}/${location}/j7-main-r5f1_0-fw
   ln -sfn /${location}/ti-ipc/j721e/ipc_echo_test_mcu3_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j7-main-r5f1_1-fw
 
-elif [ ${machine} = "j784s4-evm"]; then 
+elif [ ${machine} = "j784s4-evm" ]; then 
   ln -sfn /${location}/ti-ipc/j784s4/ipc_echo_test_c7x_1_release_strip.xe71 ${topdir}/${package_name}/${location}/j784s4-c71_0-fw
   ln -sfn /${location}/ti-ipc/j784s4/ipc_echo_test_c7x_2_release_strip.xe71 ${topdir}/${package_name}/${location}/j784s4-c71_1-fw
   ln -sfn /${location}/ti-ipc/j784s4/ipc_echo_test_c7x_3_release_strip.xe71 ${topdir}/${package_name}/${location}/j784s4-c71_2-fw
@@ -67,7 +67,7 @@ elif [ ${machine} = "j784s4-evm"]; then
   ln -sfn /${location}/ti-ipc/j784s4/ipc_echo_test_mcu4_0_release_strip.xer5f ${topdir}/${package_name}/${location}/j784s4-main-r5f2_0-fw
   ln -sfn /${location}/ti-ipc/j784s4/ipc_echo_test_mcu4_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j784s4-main-r5f2_1-fw
 
-elif [ ${machine} = "j7200-evm"]; then
+elif [ ${machine} = "j7200-evm" ]; then
   ln -sfn /${location}/ti-ipc/j7200/ipc_echo_test_mcu1_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j7200-mcu-r5f0_1-fw
   ln -sfn /${location}/ti-ipc/j7200/ipc_echo_test_mcu2_0_release_strip.xer5f ${topdir}/${package_name}/${location}/j7200-main-r5f0_0-fw
   ln -sfn /${location}/ti-ipc/j7200/ipc_echo_test_mcu2_1_release_strip.xer5f ${topdir}/${package_name}/${location}/j7200-main-r5f0_1-fw
